@@ -1,0 +1,43 @@
+﻿<Window x:Name="frmMain" x:Class="Popa_Maria_Lab5.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Popa_Maria_Lab5"
+        mc:Ignorable="d"
+        Title="Phone Subscribers Management" Height="450" Width="800">
+    <Window.Resources>
+        <DataTemplate x:Key="PhoneNumbersTemplate">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="100"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="{Binding Phonenum}" Grid.Column="0"/>
+                <TextBlock Text="{Binding Subscriber}" Grid.Column="1"/>
+            </Grid>
+        </DataTemplate>
+        <local:PhoneNumbersDataSet x:Key="phoneNumbersDataSet"/>
+        <CollectionViewSource x:Key="phoneNumbersViewSource" Source=" {Binding PhoneNumbers,Source={StaticResource phoneNumbersDataSet}}"/>
+    </Window.Resources>
+    <Grid x:Name="grdMain" Margin="10,-23,-26,11" Loaded="grdMain_Loaded">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="789*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Button x:Name="btnNew" Content="New" Margin="49,79,678,323" Click="btnNew_Click"/>
+        <Button x:Name="btnEdit" Content="Edit" Margin="49,127,678,280" Click="btnEdit_Click"/>
+        <Button x:Name="btnDelete" Content="Delete" Margin="49,171,678,234" Click="btnDelete_Click"/>
+        <Button x:Name="btnExit" Content="Exit" Margin="46,241,678,158" FontWeight="Bold" Click="btnExit_Click"/>
+        <Button x:Name="btnSave" Content="Save" IsEnabled="False" Margin="215,374,517,30" Click="btnSave_Click"/>
+        <Button x:Name="btnCancel" Content="Cancel" IsEnabled="False" Margin="524,376,197,30" Click="btnCancel_Click"/>
+        <ListBox x:Name="lstPhones" Margin="215,63,197,251" ItemsSource="{Binding}" IsSynchronizedWithCurrentItem="True" ItemTemplate="{StaticResource ResourceKey=PhoneNumbersTemplate}"/>
+        <Button x:Name="btnNext" Content="Next" Margin="524,247,199,158" RenderTransformOrigin="0.584,0.546" Click="btnNext_Click"/>
+        <Button x:Name="btnPrevious" Content="Previous" Margin="215,243,496,158" Click="btnPrevious_Click"/>
+        <Label x:Name="lblPhoneNum" Content="Phone Number :" Margin="215,296,452,101"/>
+        <Label x:Name="lblSubscriber" Content="Subscriber :" Margin="215,326,476,75"/>
+        <TextBox x:Name="txtPhoneNumber" TextWrapping="Wrap" IsEnabled="False" Margin="324,302,197,128" Text="{Binding Path=Phonenum}" />
+        <TextBox x:Name="txtSubscriber" TextWrapping="Wrap" IsEnabled="False" Margin="324,335,199,101" Text="{Binding Path=Subscriber}" />
+
+    </Grid>
+</Window>
